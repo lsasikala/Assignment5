@@ -79,7 +79,7 @@ app.get("/students", (req, res) => {
     });
     
 });
-app.get("/tas", (req,res)=>{
+/*app.get("/tas", (req,res)=>{
     collegeData.getTAs()
     //Retrieve all teaching assistants
         .then((tas) => {
@@ -98,6 +98,7 @@ app.get("/tas", (req,res)=>{
     });
 
 });
+*/
 app.get("/courses",(req,res) =>{
     collegeData.getCourses()
     //Retrieve courses
@@ -138,18 +139,7 @@ app.get("/course/:id", (req,res) => {
     });
 });
 
-/*app.get("/course/:id", (req, res) => {
-    const courseId = req.params.id;
-    collegeData.getCourseById(courseId)
-      .then((course) => {
-        console.log(course); // Check if the correct course object is retrieved
-        res.render("course", { course: course });
-      })
-      .catch((err) => {
-        console.error(err);
-        res.render("course", { message: "Error fetching course details." });
-      });
-  });*/
+
 app.use(function(req,res,next){
     let route = req.path.substring(1);
     app.locals.activeRoute = "/" + (isNaN(route.split('/')[1]) ? route.replace(/\/(?!.*)/, "") : route.replace(/\/(.*)/, ""));    
@@ -184,22 +174,8 @@ app.post("/students/add", (req, res) => {
       });
   });
 
-/*app.post("/student/update",(req,res) => {
-    const studentNum = parseInt(req.body.studentNum);
-    collegeData.updateSudent(studentNum, req.body)
-    .then(() => {
-        res.redirect("/students");
-    })
-    .catch(()=> {
-        res.render("student", {message:"Failed to update student."});
-    });
-});
-*/
-/*app.post("/student/update", (req, res) => {
-    console.log(req.body);
-    res.redirect("/students");
-});
-*/
+
+
 app.post("/student/update", (req, res) => {
     const updatedStudent = req.body; // Get the submitted form data
     console.log("Received updated student data:", updatedStudent);
@@ -214,42 +190,8 @@ app.post("/student/update", (req, res) => {
         res.redirect("/students");
       });
   });
-/*app.post("/student/update", (req, res) => {
-    const studentNum = req.body.studentNum;
-    const updatedStudent = {
-        studentNum: studentNum,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        address: {
-            street: req.body.addressStreet,
-            city: req.body.addressCity,
-            province: req.body.addressProvince
-        },
-        TA: req.body.TA === "on", // Convert the checkbox value to a boolean
-        status: req.body.status,
-        course: parseInt(req.body.course) // Convert course to an integer
-    };
 
-    collegeData.updateStudent(updatedStudent)
-        .then(() => {
-            res.redirect("/students");
-        })
-        .catch((error) => {
-            res.render("student", { student: updatedStudent, message: error });
-        });
-});
-*/
-/*app.post("/student/update", (req, res) => {
-    collegeData.updateStudent(req.body)
-      .then(() => {
-        res.redirect("/students");
-      })
-      .catch((error) => {
-        console.log("Error updating student:", error);
-        res.render("error", { message: "Failed to update student." });
-      });
-  });*/
+
 app.use((req,res) =>{
     res.status(404).send("Page Not Found");    //Message if there is no matching routes
 });

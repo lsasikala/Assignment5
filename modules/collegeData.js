@@ -42,7 +42,7 @@ module.exports.getAllStudents = function(){
     })
 }
 
-module.exports.getTAs = function () {
+/*module.exports.getTAs = function () {
     return new Promise(function (resolve, reject) {
         var filteredStudents = [];
 
@@ -60,7 +60,7 @@ module.exports.getTAs = function () {
         resolve(filteredStudents);
     });
 };
-
+*/
 module.exports.getCourses = function(){
    return new Promise((resolve,reject)=>{
     if (dataCollection.courses.length == 0) {
@@ -124,29 +124,7 @@ module.exports.getCourseById = function (id) {
 }
 
 
-/*module.exports.updateStudent = function (updatedStudent) {
-  return new Promise((resolve, reject) => {
-    const index = students.findIndex((student) => student.studentNum === studentData.studentNum);
 
-    if (index !== -1) {
-     
-      students[index].firstName = studentData.firstName;
-      students[index].lastName = studentData.lastName;
-      students[index].email = studentData.email;
-      students[index].address.street = studentData.addressStreet;
-      students[index].address.city = studentData.addressCity;
-      students[index].address.province = studentData.addressProvince;
-      students[index].TA = studentData.TA === "on";
-      students[index].status = studentData.status;
-      students[index].course = parseInt(studentData.course); 
-      resolve();
-    } else {
-      // If no student is found with the given studentNum
-      reject("Student not found");
-    }
-  });
-}
-*/
 module.exports.updateStudent = function (updatedStudent) {
   return new Promise((resolve, reject) => {
     const studentNum = parseInt(updatedStudent.studentNum);
@@ -166,7 +144,7 @@ module.exports.updateStudent = function (updatedStudent) {
       dataCollection.students[index].course = parseInt(updatedStudent.course);
       resolve();
     } else {
-      // If no student is found with the given studentNum
+     
       reject(new Error("Student not found"));
     }
   });
